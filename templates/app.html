@@ -1,0 +1,188 @@
+<!-- 
+	Put the skeleton HTML for your Application here
+	DO NOT include <html>, <head>, or <body> tags
+	
+	Create a separate template for any repeatable components
+-->
+
+<div>
+
+	<script type="text/template" id="template_app">
+	
+		<!-- core application skeleton html -->
+		<div id="wrapper-app">
+			<section id="app_header">
+				<h1 id="app_logo">Time Assassin</h1>
+				<ul>
+					<li class="projects">Projects</li>
+					<li id="active" class="clients">Clients</li>	
+					<li>Recently Completed</li>
+					<li class="logout">Log Out</li>
+				</ul>
+			</section>
+			<div id="top_bar"><span class="add_client">Add A Client</span></div>
+			<article id="modal_client" class="hidden example_form">
+						<form id="contact" method="post" action="#">
+							<div class="project">						
+								<label for="client_name"> Client Name:</label>
+								<input type="text" name="client_name" id="client_name" />
+							</div>
+							<div class="description">						
+								<p>Primary Contact:</p>
+								<textarea rows="4" cols="40" name="client_contact" id="client_contact">
+								</textarea>
+							</div>
+						</form>
+				</article>
+			<div class="app_main"></div>
+		</div>
+	</script>
+	
+	<script type="text/template" id="template_project_link">
+	
+		<!-- repeatable html for task menu -->
+		<div id="wrapper-app">
+			<section id="app_header">
+				<h1 id="app_logo">Time Assassin</h1>
+				<ul>
+					<li id="active" class="projects">Projects</li>
+					<li class="clients">Clients</li>	
+					<li>Recently Completed</li>
+					<li class="logout">Log Out</li>
+				</ul>
+			</section>
+			<div id="top_bar"><span class="add_project">Add A Project</span></div>
+
+			<div id="modal_project" class="hidden">
+				<form id="contact" method="post" action="#">
+							<div class="project">						
+								<label for="project_name">Project Name:</label>
+								<input type="text" name="project_name" id="project_name" />
+							</div>
+							<div class="description">						
+								<p>Description:</p>
+								<textarea rows="8" cols="70" name="project_description" id="project_description">
+								</textarea>
+							</div>
+							<div class="date">						
+								<label for="project_date">Due Date:</label>
+								<input type="date" name="project_date" id="project_date" />
+							</div>
+							
+							<select name="theme" class="custom_theme" tabindex="5">
+						              <option value="normal">Normal</option>
+						              <option value="delayed">Delayed</option>
+						              <option value="urgent" >Urgent</option>
+						    </select>
+
+						</form>
+			</div>
+
+
+			<section class="app_main"></section>
+		</div>
+	
+	</script>
+	
+	<script type="text/template" id="template_task_link">
+	
+		<!-- repeatable html for task menu -->
+		<div id="wrapper-app">
+			<section id="app_header">
+				<h1 id="app_logo">Time Assassin</h1>
+				<ul>
+					<li id="active" class="projects">Projects</li>
+					<li class="clients">Clients</li>	
+					<li>Recently Completed</li>
+					<li class="logout">Log Out</li>
+				</ul>
+			</section>
+			<div id="top_bar"><span class="add_task">Add A Task</span></div>
+				 <article id="modal_task" class="hidden example_form">
+						<form id="contact" method="post" action="#">
+							<div class="project">						
+								<label for="task_name">Task Name:</label>
+								<input type="text" name="task_name" id="task_name" />
+							</div>
+							<div class="description">						
+								<p>Description:</p>
+								<textarea rows="4" cols="40" name="task_description" id="task_description">
+								</textarea>
+							</div>
+							<div class="date">						
+								<label for="new_date">Due Date:</label>
+								<input type="date" name="new_date" id="new_task_date" />
+							</div>
+							<div class="tier">						
+								<label for="new_priority">Priority:</label>
+
+								 <select name="theme" class="custom_theme" tabindex="5">
+						              <option value="normal">Normal</option>
+						              <option value="delayed">Delayed</option>
+						              <option value="urgent" >Urgent</option>
+						           </select>
+
+								<!-- <div class="delayed" data-status="delayed"></div>
+								 <div data-status="normal" id="green"></div>
+								 <div data-status="urgent" id="red"></div> -->
+							</div>
+						</form>
+				</article>
+			<aside class='divider'></aside>
+			<section class="app_main_task"></section>
+		</div>
+	
+	</script>
+	
+	
+	<script type="text/template" id="template_client_view">
+	
+		<!-- repeatable html for full task data in list -->
+		<div class="c_list" data-client="{{=id}}" >
+					<span class="c_title">{{=clientName}}</span>
+					<span class="c_desc">{{=phone}}</span>
+					<ul>
+						<li><span id="assigned_projects">Projects Assigned to this Client:</span></li>
+						<li class="edit_clients" data-id="{{=id}}">Edit</li>
+					</ul>
+		</div>
+	
+	</script>
+
+
+	<script type="text/template" id="template_project_view">
+		<div class="p_list" data-id='{{=id}}' data-clientID="{{=clientID}}">
+						<span id="project_status" class="{{=status}}">{{=status}}</span>
+						<span class="p_title">{{=projectName}}</span>
+						<span class="p_desc">{{=projectDescription}}</span>
+						<ul>
+							<li><span id="due_date">Due on:{{=dueDate}}</span></li>
+							<li><span id="tasks">Tasks Left in Project:</span></li>
+							<li class="edit_project" data-id="{{=id}}">Edit</li>
+						</ul>
+		</div>
+	</script>
+
+	<script type="text/template" id="template_task_view">
+		<div class="pt_list" data-clientID="{{=clientID}}" data-projectID="{{=projectID}}" data-id="{{=id}}">
+			<span class="{{=status}}">{{=status}}</span>
+			<span class="t_title">{{=taskName}}</span>
+			<span class="t_desc">{{=taskDescription}}</span>
+			<ul>
+				<li><span id="due_date_t">Due on:{{=dueDate}}</span></li>
+				<li class="edit_task" data-id="{{=id}}" data-projectID="{{=projectID}}">Edit</li>
+				<li><span class="finished_btn" data-id="{{=id}}">Finished This!</span></li>
+			</ul>
+		</div>
+	</script>
+	
+	<script type="text/template" id="template_side_projects">
+		<div class="pl_list" data-id='{{=id}}' data-clientID="{{=clientID}}">
+			<span class="pl_title">{{=projectName}}</span>
+			<span class="due_date_pl">Due on: {{=dueDate}}</span>		
+		</div>
+	</script>
+
+	<!-- more component templates here -->
+	
+</div>
